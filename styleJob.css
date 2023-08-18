@@ -1,0 +1,45 @@
+nav {
+    background-color: whitesmoke;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dropContent
+{
+   display: none;
+}
+
+.dropContainer:hover .dropContent
+{
+   display: block;
+   
+}
+
+
+
+.nav-div {
+    font-family: Helvetica;
+    color: black;
+    font-size: 32px;
+    padding: 5px;
+ }
+
+ .nav-div:hover {
+   opacity: 0.5;
+ }
+
+ #logo {
+    width: 100px;
+  }
+ 
+  .titles {
+    color:black;
+    text-decoration: none;
+  }
+
+  .dropItems:hover {
+    background-color: rgb(193, 192, 192);
+  }
+

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style2.css">
+    <title>Find Help Near You!</title>
+    <style>
+        #map{
+            height:400px;
+            width:100%;
+        
+        }
+        h1 {
+            text-align: center;
+        }
+
+        #results{
+            display:none;
+        }
+
+        #input-form {
+            text-align: center;
+            position: relative; top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+    <div>
+        <a href="index.html">
+        <img id = "logo" src ="humans united logo.png">
+    </a>
+    </div>
+    <div class = "nav-div">Stats</div>
+    <div class = "nav-div">
+        <a class = "titles" href="index2.html">Find Help Now!</a>
+    </div>
+    
+    <div class="dropContainer">
+        <div class = "nav-div">Resources for you &#9660</div>
+        <div class="dropContent">
+            <div class = "dropItems">
+                <a class = "titles" href="indexJob.html">Job listings</a>
+            </div>
+            <div class = "dropItems">
+                <a class = "titles" href="indexJob.html">Home rentals</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<form id="input-form">
+    <label for="input-value">Enter your location!</label>
+    <input type="text" id="input-value" name="input-value">
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById("input-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+  
+      var inputValue = document.getElementById("input-value").value;
+  
+      if (inputValue === "New York City") {
+        document.getElementById("input-form").style.display = "none";
+        document.getElementById("results").style.display = "block";
+      }
+    });
+  </script>
+  
+  
+  <div id = "results">
+    <h1>Help Near You</h1>
+    <div id="map"></div>
+    <script>
+        function initMap(){
+            var options = {
+                zoom: 13,
+                center: {lat:40.7128,lng: -74.0060}
+            }
+
+            var map = new google.maps.Map(document.getElementById('map'), options)
+
+            var markers = [
+                {
+                    coords:{lat:40.710297, lng:-74.007477},
+                    content: '<h1>Coalition for the Homeless</h1>'
+                }, 
+                {
+                    coords:{lat:40.717522, lng:-74.001556},
+                    content:'<h1>The Bowery Mission</h1>'
+                },
+                {
+                    coords:{lat:40.725170, lng:-73.991722},
+                    content: '<h1>NYC Homeless Services</h1>'
+                }
+            ]
+
+            for(var i = 0; i < markers.length; i++) {
+                addMarker(markers[i]);
+            }
+
+            function addMarker(props) {
+                var marker = new google.maps.Marker({
+                    position:props.coords,
+                    map:map,
+                });
+
+                if(props.iconImage) {
+                    marker.setIcon(props.iconImage);
+                }
+
+                if(props.content) {
+                    var infoWindow = new google.maps.InfoWindow({
+                        content:props.content
+                    });
+
+                    marker.addListener('click', function(){
+                        infoWindow.open(map, marker);
+                    });
+                }
+            }
+        }
+    </script>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByaf1RJLsAtqy7dJuJYE2c2kChXSUUmf8&callback=initMap">
+        </script>
+
+
+    
+    <script src = "script2.js"></script>   
+</body>
+</html>
